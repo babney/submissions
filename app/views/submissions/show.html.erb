@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Submitted on:</strong>
+  <%= @submission.submitted_on %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @submission.state %>
+</p>
+
+<%= link_to 'Edit', edit_submission_path(@submission) %> |
+<%= link_to 'Back', submissions_path %>
