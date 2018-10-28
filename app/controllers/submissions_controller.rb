@@ -5,7 +5,8 @@ class SubmissionsController < ApplicationController
   # GET /submissions
   # GET /submissions.json
   def index
-    @submissions = Submission.all
+    authorize Submission.new
+    @submissions = current_user.submissions
   end
 
   # GET /submissions/1
@@ -16,16 +17,19 @@ class SubmissionsController < ApplicationController
   # GET /submissions/new
   def new
     @submission = Submission.new
+    authorize @submission
   end
 
   # GET /submissions/1/edit
   def edit
+    authorize @submission
   end
 
   # POST /submissions
   # POST /submissions.json
   def create
     @submission = Submission.new(submission_params)
+    authorize @submission
     respond_to do |format|
       if @submission.save
         format.html { redirect_to @submission, notice: 'Submission was successfully created.' }
@@ -40,6 +44,7 @@ class SubmissionsController < ApplicationController
   # PATCH/PUT /submissions/1
   # PATCH/PUT /submissions/1.json
   def update
+    authorize @submission
     respond_to do |format|
       if @submission.update(submission_params)
         format.html { redirect_to @submission, notice: 'Submission was successfully updated.' }
@@ -54,6 +59,7 @@ class SubmissionsController < ApplicationController
   # DELETE /submissions/1
   # DELETE /submissions/1.json
   def destroy
+    authorize @submission
     @submission.destroy
     respond_to do |format|
       format.html { redirect_to submissions_url, notice: 'Submission was successfully destroyed.' }

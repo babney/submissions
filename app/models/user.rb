@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_and_belongs_to_many :works
+  has_many :submissions, through: :works
 
   def admin?
     roles.to_s.split(',').include? 'admin'

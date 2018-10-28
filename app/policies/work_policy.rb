@@ -7,7 +7,7 @@ class WorkPolicy < ApplicationPolicy
   end
 
   def update?
-    user.admin? || work.user == user
+    user.admin? || work.users.include?(user)
   end
 
   def create?
